@@ -1,6 +1,6 @@
 
 #!/usr/bin/env python3
-# Calculate the inverse of a square matrix."""
+"""Calculate the inverse of a square matrix."""
 
 
 def inverse(matrix):
