@@ -23,11 +23,14 @@ def minor(matrix):
         row = []
 
         for j in range(n):
-            submatrix = [
-                [matrix[r][c] for c in range(n) if c != j]
-                for r in range(n) if r != i
-            ]
-            row.append(determinant(submatrix))
+            if n == 1:
+                row.append(1)
+            else:
+                submatrix = [
+                    [matrix[r][c] for c in range(n) if c != j]
+                    for r in range(n) if r != i
+                ]
+                row.append(determinant(submatrix))
 
         minors.append(row)
 
