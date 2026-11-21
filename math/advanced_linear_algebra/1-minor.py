@@ -1,40 +1,34 @@
 
 #!/usr/bin/env python3
-"""Calculate the minor matrix of a matrix."""
-
-import importlib
-
-determinant = importlib.import_module("0-determinant").determinant
+"""Calculate the minor matrix of a square matrix."""
 
 
 def minor(matrix):
-    """Calculate the minor matrix of a square matrix."""
-
-    if (not isinstance(matrix, list) or
-            not matrix or
+    """Calculate the minor matrix using determinants."""
+    if (not isinstance(matrix, list) or not matrix or
             not all(isinstance(row, list) for row in matrix)):
         raise TypeError("matrix must be a list of lists")
 
     n = len(matrix)
 
-    if n == 0 or any(len(row) != n for row in matrix):
+    if any(len(row) != n for row in matrix):
         raise ValueError(
-            "matrix must be a non-empty square matrix"
-        )
+            "matrix must be a non-empty square matrix")
+
+    determinant = __import__('0-determinant').determinant
 
     minors = []
 
     for i in range(n):
-        row_minors = []
+        row = []
 
         for j in range(n):
             submatrix = [
                 [matrix[r][c] for c in range(n) if c != j]
                 for r in range(n) if r != i
             ]
+            row.append(determinant(submatrix))
 
-            row_minors.append(determinant(submatrix))
-
-        minors.append(row_minors)
+        minors.append(row)
 
     return minors

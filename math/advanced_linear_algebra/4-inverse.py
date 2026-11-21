@@ -1,18 +1,11 @@
 
 #!/usr/bin/env python3
-"""Calculate the inverse of a matrix."""
-
-import importlib
-
-determinant = importlib.import_module("0-determinant").determinant
-adjugate = importlib.import_module("3-adjugate").adjugate
+"""Calculate the inverse of a square matrix."""
 
 
 def inverse(matrix):
-    """Calculate the inverse of a square matrix."""
-
-    if (not isinstance(matrix, list) or
-            not matrix or
+    """Calculate the inverse using determinant and adjugate."""
+    if (not isinstance(matrix, list) or not matrix or
             not all(isinstance(row, list) for row in matrix)):
         raise TypeError("matrix must be a list of lists")
 
@@ -20,8 +13,10 @@ def inverse(matrix):
 
     if any(len(row) != n for row in matrix):
         raise ValueError(
-            "matrix must be a non-empty square matrix"
-        )
+            "matrix must be a non-empty square matrix")
+
+    determinant = __import__('0-determinant').determinant
+    adjugate = __import__('3-adjugate').adjugate
 
     det = determinant(matrix)
 
@@ -30,9 +25,7 @@ def inverse(matrix):
 
     adj = adjugate(matrix)
 
-    inverse_matrix = [
+    return [
         [element / det for element in row]
         for row in adj
     ]
-
-    return inverse_matrix

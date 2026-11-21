@@ -1,17 +1,11 @@
 
 #!/usr/bin/env python3
-"""Calculate the adjugate matrix."""
-
-import importlib
-
-cofactor = importlib.import_module("2-cofactor").cofactor
+"""Calculate the adjugate matrix of a square matrix."""
 
 
 def adjugate(matrix):
-    """Calculate the adjugate matrix."""
-
-    if (not isinstance(matrix, list) or
-            not matrix or
+    """Calculate the adjugate by transposing the cofactor."""
+    if (not isinstance(matrix, list) or not matrix or
             not all(isinstance(row, list) for row in matrix)):
         raise TypeError("matrix must be a list of lists")
 
@@ -19,14 +13,12 @@ def adjugate(matrix):
 
     if any(len(row) != n for row in matrix):
         raise ValueError(
-            "matrix must be a non-empty square matrix"
-        )
+            "matrix must be a non-empty square matrix")
 
+    cofactor = __import__('2-cofactor').cofactor
     cofactor_matrix = cofactor(matrix)
 
-    adj = [
+    return [
         [cofactor_matrix[j][i] for j in range(n)]
         for i in range(n)
     ]
-
-    return adj

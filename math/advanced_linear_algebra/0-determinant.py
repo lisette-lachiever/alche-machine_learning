@@ -1,13 +1,11 @@
 
 #!/usr/bin/env python3
-"""Calculate the determinant of a matrix."""
+"""Calculate the determinant of a square matrix."""
 
 
 def determinant(matrix):
-    """Calculate the determinant of a square matrix."""
-
-    if (not isinstance(matrix, list) or
-            not matrix or
+    """Calculate the determinant using recursive expansion."""
+    if (not isinstance(matrix, list) or not matrix or
             not all(isinstance(row, list) for row in matrix)):
         raise TypeError("matrix must be a list of lists")
 
@@ -19,30 +17,20 @@ def determinant(matrix):
     if any(len(row) != n for row in matrix):
         raise ValueError("matrix must be a square matrix")
 
-    def calculate_det(mat):
-        size = len(mat)
+    if n == 1:
+        return matrix[0][0]
 
-        # A 1x1 matrix
-        if size == 1:
-            return mat[0][0]
+    if n == 2:
+        return (matrix[0][0] * matrix[1][1] -
+                matrix[0][1] * matrix[1][0])
 
-        # A 2x2 matrix
-        if size == 2:
-            return (mat[0][0] * mat[1][1] -
-                    mat[0][1] * mat[1][0])
+    det = 0
 
-        det = 0
+    for j in range(n):
+        submatrix = [
+            [matrix[i][k] for k in range(n) if k != j]
+            for i in range(1, n)
+        ]
+        det += ((-1) ** j) * matrix[0][j] * determinant(submatrix)
 
-        # Expand along the first row
-        for col in range(size):
-            submatrix = [
-                [mat[i][j] for j in range(size) if j != col]
-                for i in range(1, size)
-            ]
-
-            sign = (-1) ** col
-            det += sign * mat[0][col] * calculate_det(submatrix)
-
-        return det
-
-    return calculate_det(matrix)
+    return det
