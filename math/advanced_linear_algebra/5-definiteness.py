@@ -1,5 +1,5 @@
 
-#!/usr/bin/env python3
+# !/usr/bin/env python3
 """Determine the definiteness of a symmetric matrix."""
 
 import numpy as np

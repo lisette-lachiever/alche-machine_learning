@@ -1,5 +1,5 @@
 
-#!/usr/bin/env python3
+# !/usr/bin/env python3
 """Calculate the adjugate matrix of a square matrix."""
 
 

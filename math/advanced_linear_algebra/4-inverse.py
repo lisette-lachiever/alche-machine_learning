@@ -1,5 +1,5 @@
 
-#!/usr/bin/env python3
+# !/usr/bin/env python3
 """Calculate the inverse of a square matrix."""
 
 
