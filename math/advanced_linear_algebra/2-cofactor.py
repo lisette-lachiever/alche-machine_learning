@@ -1,5 +1,5 @@
-
 #!/usr/bin/env python3
+
 """Calculate the cofactor matrix of a square matrix."""
 
 

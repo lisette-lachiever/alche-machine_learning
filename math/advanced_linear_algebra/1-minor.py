@@ -1,5 +1,5 @@
-
 #!/usr/bin/env python3
+
 """Calculate the minor matrix of a square matrix."""
 
 
